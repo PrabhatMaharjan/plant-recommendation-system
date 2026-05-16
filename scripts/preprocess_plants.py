@@ -357,16 +357,25 @@ def preprocess_and_load():
             df["category_name"] = "General"
         df["category_name"] = df["category_name"].fillna("General").str.strip()
 
-        # Step 4: Standardize all attribute columns
-        df["light_requirement"] = df.get("light_requirement", pd.Series(["Medium"] * len(df))).apply(standardize_light)
-        df["maintenance_level"] = df.get("maintenance_level", pd.Series(["Medium"] * len(df))).apply(standardize_maintenance)
-        df["toxicity_level"] = df.get("toxicity_level", pd.Series(["Non-toxic"] * len(df))).apply(standardize_toxicity)
-        df["watering_frequency"] = df.get("watering_frequency", pd.Series(["Weekly"] * len(df))).apply(standardize_watering)
-        df["size_category"] = df.get("size_category", pd.Series(["Medium"] * len(df))).apply(standardize_size)
-        df["growth_rate"] = df.get("growth_rate", pd.Series(["Moderate"] * len(df))).apply(standardize_growth)
-        df["humidity_requirement"] = df.get("humidity_requirement", pd.Series(["Medium"] * len(df))).apply(standardize_humidity)
-        df["temperature_range"] = df.get("temperature_range", pd.Series(["Moderate"] * len(df))).apply(standardize_temperature)
+        # Step 4: Fill NaN values before standardization
+        df["light_requirement"] = df.get("light_requirement", pd.Series(["Medium"] * len(df))).fillna("Medium")
+        df["maintenance_level"] = df.get("maintenance_level", pd.Series(["Medium"] * len(df))).fillna("Medium")
+        df["toxicity_level"] = df.get("toxicity_level", pd.Series(["Non-toxic"] * len(df))).fillna("Non-toxic")
+        df["watering_frequency"] = df.get("watering_frequency", pd.Series(["Weekly"] * len(df))).fillna("Weekly")
+        df["size_category"] = df.get("size_category", pd.Series(["Medium"] * len(df))).fillna("Medium")
+        df["growth_rate"] = df.get("growth_rate", pd.Series(["Moderate"] * len(df))).fillna("Moderate")
+        df["humidity_requirement"] = df.get("humidity_requirement", pd.Series(["Medium"] * len(df))).fillna("Medium")
+        df["temperature_range"] = df.get("temperature_range", pd.Series(["Moderate"] * len(df))).fillna("Moderate")
 
+        # Standardize all attribute columns
+        df["light_requirement"] = df["light_requirement"].apply(standardize_light)
+        df["maintenance_level"] = df["maintenance_level"].apply(standardize_maintenance)
+        df["toxicity_level"] = df["toxicity_level"].apply(standardize_toxicity)
+        df["watering_frequency"] = df["watering_frequency"].apply(standardize_watering)
+        df["size_category"] = df["size_category"].apply(standardize_size)
+        df["growth_rate"] = df["growth_rate"].apply(standardize_growth)
+        df["humidity_requirement"] = df["humidity_requirement"].apply(standardize_humidity)
+        df["temperature_range"] = df["temperature_range"].apply(standardize_temperature)
         print("\n   Standardization complete.")
 
         # Step 5: Insert PlantCategories
