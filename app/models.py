@@ -1,8 +1,5 @@
 """
 models.py - SQLAlchemy ORM Models
-Database Manager: Prabhat Maharjan (0371462)
-Group 13 - Indoor Plant Recommendation System
-
 All 10 tables defined here in 3NF with full foreign key constraints.
 """
 
@@ -11,18 +8,16 @@ from datetime import datetime
 
 db = SQLAlchemy()
 
-
-# ─────────────────────────────────────────────
 # TABLE 1: User
-# ─────────────────────────────────────────────
+
 class User(db.Model):
     __tablename__ = "User"
 
     user_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(150), nullable=False, unique=True)
-    password = db.Column(db.String(255), nullable=False)        # stored as bcrypt hash
-    experience_level = db.Column(db.String(20), nullable=False)  # Beginner/Intermediate/Expert
+    password = db.Column(db.String(255), nullable=False)        # hash
+    experience_level = db.Column(db.String(20), nullable=False)  
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     # Relationships
@@ -51,9 +46,7 @@ class User(db.Model):
         }
 
 
-# ─────────────────────────────────────────────
 # TABLE 2: Guest
-# ─────────────────────────────────────────────
 class Guest(db.Model):
     __tablename__ = "Guest"
 
@@ -79,9 +72,7 @@ class Guest(db.Model):
         }
 
 
-# ─────────────────────────────────────────────
 # TABLE 3: UserPreference  (registered users only)
-# ─────────────────────────────────────────────
 class UserPreference(db.Model):
     __tablename__ = "UserPreference"
 
@@ -104,9 +95,7 @@ class UserPreference(db.Model):
         }
 
 
-# ─────────────────────────────────────────────
 # TABLE 4: Environment  (registered users only)
-# ─────────────────────────────────────────────
 class Environment(db.Model):
     __tablename__ = "Environment"
 
@@ -130,9 +119,7 @@ class Environment(db.Model):
         }
 
 
-# ─────────────────────────────────────────────
 # TABLE 5: PlantCategory
-# ─────────────────────────────────────────────
 class PlantCategory(db.Model):
     __tablename__ = "PlantCategory"
 
@@ -149,9 +136,7 @@ class PlantCategory(db.Model):
         }
 
 
-# ─────────────────────────────────────────────
 # TABLE 6: Plant
-# ─────────────────────────────────────────────
 class Plant(db.Model):
     __tablename__ = "Plant"
 
@@ -168,6 +153,7 @@ class Plant(db.Model):
     toxicity_level = db.Column(db.String(20), nullable=False)       # Non-toxic/Mildly toxic/Toxic
     growth_rate = db.Column(db.String(10), nullable=False)          # Slow/Moderate/Fast
     size_category = db.Column(db.String(10), nullable=False)        # Small/Medium/Large
+    image_url = db.Column(db.String(500), nullable=True)            # used for fetching image from usplash
 
     # Relationships
     ratings = db.relationship("Rating", backref="plant", lazy=True,
@@ -191,13 +177,12 @@ class Plant(db.Model):
             "temperature_range": self.temperature_range,
             "toxicity_level": self.toxicity_level,
             "growth_rate": self.growth_rate,
-            "size_category": self.size_category
+            "size_category": self.size_category,
+            "image_url": self.image_url
         }
 
 
-# ─────────────────────────────────────────────
 # TABLE 7: Interaction  (both User and Guest)
-# ─────────────────────────────────────────────
 class Interaction(db.Model):
     __tablename__ = "Interaction"
 
@@ -222,9 +207,7 @@ class Interaction(db.Model):
         }
 
 
-# ─────────────────────────────────────────────
 # TABLE 8: Rating  (registered users only)
-# ─────────────────────────────────────────────
 class Rating(db.Model):
     __tablename__ = "Rating"
 
@@ -251,9 +234,7 @@ class Rating(db.Model):
         }
 
 
-# ─────────────────────────────────────────────
 # TABLE 9: Review  (registered users only)
-# ─────────────────────────────────────────────
 class Review(db.Model):
     __tablename__ = "Review"
 
@@ -275,9 +256,7 @@ class Review(db.Model):
         }
 
 
-# ─────────────────────────────────────────────
 # TABLE 10: Recommendation  (User or Guest)
-# ─────────────────────────────────────────────
 class Recommendation(db.Model):
     __tablename__ = "Recommendation"
 
