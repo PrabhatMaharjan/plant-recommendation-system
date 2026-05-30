@@ -1,10 +1,6 @@
 """
 run.py - Flask Application Entry Point
-Database Manager: Prabhat Maharjan (0371462)
-Group 13 - Indoor Plant Recommendation System
-
-Local:  python run.py
-Render: gunicorn run:app  (handled automatically by Procfile)
+python run.py
 """
 
 from app import create_app

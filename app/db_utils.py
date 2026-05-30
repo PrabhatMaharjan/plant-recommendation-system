@@ -1,8 +1,5 @@
 """
 db_utils.py - All Database Operations
-Database Manager: Prabhat Maharjan (0371462)
-Group 13 - Indoor Plant Recommendation System
-
 Contains:
   - register_user()
   - login_user()
@@ -28,9 +25,7 @@ from app.models import (db, User, Guest, UserPreference, Environment,
                          Review, Recommendation)
 
 
-# ═══════════════════════════════════════════════════════
 # SECTION 1 — USER MANAGEMENT
-# ═══════════════════════════════════════════════════════
 
 def register_user(name: str, email: str, password: str, experience_level: str) -> dict:
     """
@@ -97,9 +92,7 @@ def create_guest_session() -> dict:
         return {"success": False, "error": str(e)}
 
 
-# ═══════════════════════════════════════════════════════
 # SECTION 2 — USER PREFERENCES & ENVIRONMENT
-# ═══════════════════════════════════════════════════════
 
 def save_user_preference(user_id: int, preferred_light: str, preferred_maintenance: str,
                          preferred_size: str, pet_friendly_required: bool) -> dict:
@@ -180,9 +173,7 @@ def save_environment(user_id: int, light_level: str, humidity: str,
         return {"success": False, "error": str(e)}
 
 
-# ═══════════════════════════════════════════════════════
 # SECTION 3 — INTERACTIONS, RATINGS, REVIEWS
-# ═══════════════════════════════════════════════════════
 
 def log_interaction(plant_id: int, interaction_type: str,
                     user_id: int = None, guest_id: int = None) -> dict:
@@ -275,9 +266,8 @@ def submit_review(user_id: int, plant_id: int, review_text: str) -> dict:
         return {"success": False, "error": str(e)}
 
 
-# ═══════════════════════════════════════════════════════
-# SECTION 4 — RECOMMENDATION ENGINE (DB MANAGER PART)
-# ═══════════════════════════════════════════════════════
+# SECTION 4 — RECOMMENDATION ENGINE
+
 
 def generate_cf_recommendation(user_id: int, top_n: int = 10) -> dict:
     """
@@ -540,9 +530,7 @@ def _fallback_popular_recommendation(user_id: int = None, top_n: int = 10) -> di
         return {"success": False, "error": str(e)}
 
 
-# ═══════════════════════════════════════════════════════
 # SECTION 5 — RETRIEVAL HELPERS (for Flask routes)
-# ═══════════════════════════════════════════════════════
 
 def get_recommendations(user_id: int = None, guest_id: int = None) -> dict:
     """

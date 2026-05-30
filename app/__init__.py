@@ -1,9 +1,5 @@
 """
 __init__.py - Flask App Factory
-Database Manager: Prabhat Maharjan (0371462)
-Group 13 - Indoor Plant Recommendation System
-
-Uses SQLite for both local development and Render cloud deployment.
 """
 
 import os

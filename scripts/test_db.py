@@ -1,11 +1,5 @@
 """
 test_db.py - Database Testing Script
-Database Manager: Prabhat Maharjan (0371462)
-Group 13 - Indoor Plant Recommendation System
-
-Run after preprocess_plants.py to verify all DB functions work correctly.
-
-Usage:
     python scripts/test_db.py
 """
 

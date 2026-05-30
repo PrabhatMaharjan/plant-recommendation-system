@@ -1,18 +1,6 @@
 """
 preprocess_plants.py - Data Preprocessing & Loading Script
-Database Manager: Prabhat Maharjan (0371462)
-Group 13 - Indoor Plant Recommendation System
-
-Run this script ONCE after init to load Kaggle CSV data into the database.
-
-Usage:
     python scripts/preprocess_plants.py
-
-Place your Kaggle CSV files in the data/ folder before running.
-Supported file names (any of these will be picked up automatically):
-  - house_plant_species.csv
-  - plants_growth_care.csv
-  - indoor_plant_health.csv
 """
 
 import os
@@ -28,9 +16,7 @@ from app.models import db, PlantCategory, Plant
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 
 
-# ─────────────────────────────────────────────
 # STANDARDIZATION HELPERS
-# ─────────────────────────────────────────────
 
 def standardize_light(val: str) -> str:
     """Maps various raw light values → Low / Medium / High"""
@@ -137,9 +123,7 @@ def standardize_temperature(val: str) -> str:
     return "Moderate"
 
 
-# ─────────────────────────────────────────────
 # CSV LOADING & COLUMN MAPPING
-# ─────────────────────────────────────────────
 
 def load_csv_files() -> pd.DataFrame:
     """
@@ -321,9 +305,7 @@ def _generate_sample_data() -> pd.DataFrame:
     return df
 
 
-# ─────────────────────────────────────────────
 # MAIN LOADING PROCEDURE
-# ─────────────────────────────────────────────
 
 def preprocess_and_load():
     app = create_app()

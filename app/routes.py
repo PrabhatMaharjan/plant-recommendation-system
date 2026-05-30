@@ -1,11 +1,5 @@
 """
 routes.py - Flask API Routes
-Database Manager: Prabhat Maharjan (0371462)
-Group 13 - Indoor Plant Recommendation System
-
-All routes call db_utils functions.
-Bishesh (Backend Developer) wires these into the frontend.
-
 Endpoints:
   POST /api/register
   POST /api/login
@@ -27,14 +21,12 @@ from app import db_utils
 main = Blueprint("main", __name__)
 
 
-# ── Helper: get user/guest from session ─────────────────
+# Helper: get user/guest from session
 def get_session_identity():
     return session.get("user_id"), session.get("guest_id")
 
 
-# ════════════════════════════════════════════════
 # AUTH ROUTES
-# ════════════════════════════════════════════════
 
 @main.route("/api/register", methods=["POST"])
 def register():
@@ -99,9 +91,7 @@ def guest_session():
     return jsonify(result), 500
 
 
-# ════════════════════════════════════════════════
 # PREFERENCES & ENVIRONMENT ROUTES
-# ════════════════════════════════════════════════
 
 @main.route("/api/preferences", methods=["POST"])
 def save_preferences():
@@ -159,9 +149,7 @@ def save_environment():
     return jsonify(result), status
 
 
-# ════════════════════════════════════════════════
 # INTERACTION, RATING, REVIEW ROUTES
-# ════════════════════════════════════════════════
 
 @main.route("/api/interact", methods=["POST"])
 def interact():
@@ -227,9 +215,7 @@ def review_plant():
     return jsonify(result), status
 
 
-# ════════════════════════════════════════════════
 # RECOMMENDATION ROUTES
-# ════════════════════════════════════════════════
 
 @main.route("/api/recommend", methods=["POST"])
 def recommend():
@@ -264,9 +250,7 @@ def get_recommendations():
     return jsonify(result), 200
 
 
-# ════════════════════════════════════════════════
 # PLANT ROUTES
-# ════════════════════════════════════════════════
 
 @main.route("/api/plants", methods=["GET"])
 def get_plants():
