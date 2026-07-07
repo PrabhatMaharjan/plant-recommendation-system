@@ -30,7 +30,7 @@ def run_tests():
         # ── Test 2: Register user ─────────────────────────
         result = db_utils.register_user(
             name="Test User",
-            email="testuser_unique999@example.com",
+            email="testuser_unique998@example.com",
             password="TestPass123",
             experience_level="Beginner"
         )
